@@ -1,5 +1,0 @@
-Host 611
-    HostName 192.168.200.41
-    User cdd
-    Port 22
-    IdentityFile ~/.ssh/cdd_rsa
