@@ -1,5 +1,5 @@
-# iXGBNet: an integrative XGBoost-based method for inferring gene regulatory networks
-iXGBNet is a method based on the XGBoost model and is able to integrate the information from the other data, such as the knockout data, to refine the inferred GRN. Moreover, iXGBNet utilizes a new way to tackle the time-series expression data by considering the accumulation impact of the gene expressions at previous time points. Using the benchmark datasets from DREAM4 and DREAM5 challenges, we show that iXGBNet achieves better performance than other state-of-the-art methods.
+# PFBNet: Prior fused boosting method for gene regulatory network inference
+we present a novel method, namely prior fused boosting network inference method (PFBNet), to infer GRNs from time-series expression data by using the non-linear model of Boosting and the prior information (e.g., the knockout data) fusion scheme. The experiments on the benchmark datasets from DREAM challenge as well as the E.coli datasets show that PFBNet achieves significantly better performance than other state-of-the-art methods (HiDi, iRafNet and BiXGBoost).  
 ## Dependency
 Xgboost Version=0.6 [Reference Link](https://xgboost.readthedocs.io/en/latest/build.html "悬停显示")
 ### Pip install
@@ -7,7 +7,7 @@ Xgboost Version=0.6 [Reference Link](https://xgboost.readthedocs.io/en/latest/bu
     xgboost Version>=0.6
     Pandas>=0.19.x
     Numpy>=1.12.x
-Now, we give a code example in two data sets, dream4 and dream5, respectively.    
+Now, we give a code example in two data sets, dream4 and Ecoil, respectively.    
 ## Dream4 example
     from dream4.iXGBNet_dream4 import * 
     import pandas as pd
@@ -31,20 +31,3 @@ Now, we give a code example in two data sets, dream4 and dream5, respectively.
     alpha: Decay factor.
     iter_num: Number of iterations in XGBoost model.
     data_ko: Knockout experimental data.       
-## Dream5 example
-    from dream5.iXGBNet_dream5 import *
-    import pandas as pd
-    for i in [1,3]:
-        # Read data
-        file_ss = "data/steadystate_data/dream5_net{}_steadystate.csv".format(i)
-        data_ss = pd.read_csv(file_ss).to_numpy()
-        
-        # Compute weights of gene regulatory network
-        vv = main(data_ss, 1000)
-        
-        # Export result
-        df = pd.DataFrame(vv)
-        df.to_csv("result/dream5_d{}.csv".format(i), index=False)
-### Dream5 parameters
-    data_ss: Steady-state experimental data.
-    iter_num: Number of iterations in XGBoost model.
